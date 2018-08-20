@@ -18,8 +18,9 @@ class BinarySearchTree {
 		var newTreeNode = new treeNode(data);
 		if( this.root === null){
 			this.root = newTreeNode;
+		} else {	
+			this.insertNode(this.root, newTreeNode);
 		}	
-		this.insertNode(this.root, newTreeNode);
 	}	
 	insertNode(node, newTreeNode){
 		if(node.data < newTreeNode.data){
@@ -70,7 +71,7 @@ class BinarySearchTree {
 		}	
 	}	
 	inorder(){
-		return this.traverseInorder(this.root);		
+		this.traverseInorder(this.root);		
 	}
 	traverseInorder(node) {
 		if(node != null){
@@ -78,7 +79,6 @@ class BinarySearchTree {
 			console.log(node.data);
 			this.traverseInorder(node.right);
 		}	
-		return; 
 	}
 	preOrder(){
 		this.traversePreOrder(this.root);		
@@ -89,7 +89,6 @@ class BinarySearchTree {
 			this.traversePreOrder(node.left);
 			this.traversePreOrder(node.right);
 		}
-		return; 	
 	}	
 	postOrder(){
 		this.traversePostOrder(this.root);		
@@ -101,7 +100,6 @@ class BinarySearchTree {
 			console.log(node.data);
 
 		}	
-		return; 
 
 	}
 	search(data) {
