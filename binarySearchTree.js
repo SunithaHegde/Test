@@ -23,7 +23,7 @@ class BinarySearchTree {
 		}	
 	}	
 	insertNode(node, newTreeNode){
-		if(node.data < newTreeNode.data){
+		if(newTreeNode.data < node.data ){
 			if(node.left === null){
 				node.left = newTreeNode;	
 			} else {
@@ -45,16 +45,24 @@ class BinarySearchTree {
 		if(node === null) {
 			return ;
 		} 	else if(data < node.data){
-				 this.removeNode(data, node.left);
+				 node.left = this.removeNode(data, node.left);
+				 return node;
 		}	else if(data > node.data){
-				 this.removeNode(data, node.right);	
+				 node.right = this.removeNode(data, node.right);	
+				 return node;
+
 		}	else {
 				if(!node.left && !node.right){
 					node = null;
+					return node;
+
 				} else if(!node.left){
 					node = node.right;
+					return node;
 				}	else if(!node.right){
 					node = node.left;	
+					return node;
+	
 				}	else {
 					var minNode = this.findMin(node.right);
 					this.removeNode(minNode.data, node.right);	
