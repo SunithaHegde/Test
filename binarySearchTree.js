@@ -127,3 +127,8 @@ class BinarySearchTree {
 		}	
 	}	
 }
+
+var bst = new BinarySearchTree();
+bst.insert(7);
+bst.insert(5);
+bst.inorder();
