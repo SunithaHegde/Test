@@ -127,8 +127,8 @@ O(n^2) 2 loops
  
  /** Find maximum length sub-array having given sum O(n^2) **/
  
- let somArr = [5,6,-5,5,3,5,3,-2,0];
- let sum = 8;
+ var somArr = [5,6,-5,5,3,5,3,-2,0];
+ var sum = 8;
  
  function findMaxLengthSubArrWithSum(somArr,sum){
 	let maxLength = 1;
@@ -163,3 +163,89 @@ O(n^2) 2 loops
 	console.log(map)
 	return len;
   }	  
+/**Find maximum length sub-array having equal number of 0’s and 1’s 
+	O(n^2) - 2 loops and check length
+	better solution O(n)
+**/
+var zeroOneArr=[0,0,1,0,1,0,0];
+function findMaxLengthsubArrWithEqualNumOf01(zeroOneArr){
+	for(let i = 0;i < zeroOneArr.length; ++i){
+		if(zeroOneArr[i] == 0){
+			zeroOneArr[i] = -1;
+		}	
+	}	
+	return findMaxLengthSubArrWithSumBetter(zeroOneArr,0);
+}	
+
+/*Sort an array containing 0’s, 1’s and 2’s (Dutch national flag problem) 
+Similar solution to RGB Ball problem 
+**/
+var dutchArray = [0, 1, 2, 2, 1, 0, 0, 2, 0, 1, 1, 0];
+function sortArrayOfDup(arr){
+	let start =0;
+	let cur = 0;
+	let end = arr.length - 1;
+	let pivot = 1;
+	let temp; 
+	while(cur <= end){
+		if(arr[cur] < pivot){
+			temp = arr[start];
+			arr[start] = arr[cur];
+			arr[cur] = temp;
+			start++;
+			cur++;
+		} else if(arr[cur] > pivot){
+			temp = arr[end];
+			arr[end] = arr[cur];
+			arr[cur] = temp;
+			end--;
+		}	else {
+			cur++;
+		}	
+	}
+	return arr;
+}	
+
+/** 
+Inplace merge two sorted arrays
+Input
+X[] = { 1, 4, 7, 8, 10 } 
+Y[] = { 2, 3, 9 }
+
+output
+X[] = { 1, 2, 3, 4, 7 }
+Y[] = { 8, 9, 10 }
+Complexity O(n^2)?? 
+**/
+var X = [1, 4, 7, 8, 10];
+var Y = [ 2, 3, 9 ];
+function inplaceMergeTwoSortedArray(X,Y) { 
+	for(let i =0 ;i < X.length ;++i){
+		if(X[i] > Y[0]){
+			X.splice(i,0,Y[0])
+			Y.splice(0,1);
+			Y.push(X.pop());
+		}	
+	}
+	Y.sort(function(a, b){return a - b});
+	return {
+		X:X,
+		Y:Y	
+	}	
+}
+// O (m*n)
+function inplaceMerge(X,Y){
+	let temp; 
+	for(let i =0 ;i < X.length ;++i){
+		if(X[i] > Y[0]){
+			temp = X[i];
+			X[i] = Y[0];
+			Y[0] = temp;
+			Y.sort(function(a, b){return a - b});
+		}	
+	}		
+	return {
+		X:X,
+		Y:Y	
+	}
+}	
